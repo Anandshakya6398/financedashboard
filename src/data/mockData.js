@@ -27,4 +27,18 @@ export const transactionsData = [
     category: "Freelance",
     type: "income",
   },
+    {
+    id: 5,
+    date: "2026-04-05",
+    amount: 200,
+    category: "Freelance",
+    type: "income",
+  },
+    {
+    id: 6,
+    date: "2026-04-04",
+    amount: 2000,
+    category: "Freelance",
+    type: "expense",
+  },
 ];

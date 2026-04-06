@@ -1,12 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { transactionsData } from "../data/mockData";
 
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  const [transactions, setTransactions] = useState(transactionsData);
+  const [transactions, setTransactions] = useState([]);
   const [role, setRole] = useState("viewer");
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+
+  useEffect(() => {
+    const saved = localStorage.getItem("transactions");
+    setTransactions(saved ? JSON.parse(saved) : transactionsData);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("transactions", JSON.stringify(transactions));
+  }, [transactions]);
 
   return (
     <AppContext.Provider
@@ -17,6 +27,8 @@ export const AppProvider = ({ children }) => {
         setRole,
         search,
         setSearch,
+        filter,
+        setFilter,
       }}
     >
       {children}
